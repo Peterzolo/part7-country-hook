@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getCountryByName } from "../services";
+import { getAllBlogs } from "../services/blog.service";
 
 export const useField = (type) => {
   const [value, setValue] = useState("");
@@ -34,4 +35,20 @@ export const useCountry = (name) => {
   }, [name]);
 
   return country;
+};
+
+export const useResource = () => {
+  const [blogs, setBlogs] = useState([]);
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      const response = await getAllBlogs();
+      setBlogs({ found: true, data: response });
+      try {
+      } catch (error) {
+        setBlogs({ found: false });
+      }
+    };
+    fetchBlogs();
+  }, []);
+  return blogs;
 };

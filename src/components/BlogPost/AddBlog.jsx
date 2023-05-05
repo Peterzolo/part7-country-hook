@@ -3,14 +3,18 @@ import React, { useEffect, useState } from "react";
 import Notification from "../notification/Notification";
 import ErrorNotification from "../notification/ErrorNotification";
 import { createBlog, setToken } from "../../services";
+import { useField } from "../../hooks/CustomeHook";
 
 const AddBlog = () => {
   const [successMessage, setSuccessMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
-  const [title, setTitle] = useState("");
-  const [url, setUrl] = useState("");
+  // const [title, setTitle] = useState("");
+  // const [url, setUrl] = useState("");
   // eslint-disable-next-line no-unused-vars
+  const title = useField("");
+  const url = useField("");
   const [user, setUser] = useState("");
+  console.log("USER", user);
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem("user");
@@ -26,8 +30,8 @@ const AddBlog = () => {
 
     try {
       const newBlogObject = {
-        title: title,
-        url: url,
+        title: title.value,
+        url: url.value,
       };
 
       const response = await createBlog(newBlogObject);
@@ -37,8 +41,8 @@ const AddBlog = () => {
         setTimeout(() => {
           setSuccessMessage(null);
         }, 1000);
-        setTitle("");
-        setUrl("");
+        title.value = "";
+        url.value = "";
       } else {
         setErrorMessage("Could not add blog");
         setTimeout(() => {
@@ -66,16 +70,16 @@ const AddBlog = () => {
           className="add-blog-input"
           type="text"
           name="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          value={title.value}
+          onChange={title.onChange}
           placeholder="Add title here ...."
         />
         <input
           className="add-blog-input"
           type="text"
           name="url"
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
+          value={url.value}
+          onChange={url.onChange}
           placeholder="Add Url here ...."
         />
         <button type="submit" className="add-blog-button">

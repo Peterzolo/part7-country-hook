@@ -5,24 +5,26 @@ import "../components/style/Styles.css";
 const Menu = () => {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
-  console.log("USER", typeof user);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  console.log("USER----", user.username);
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user) {
-      setUser(user.toString());
+      setUser(user);
+      setIsLoggedIn(true);
     }
   }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
+    setUser({});
+    setIsLoggedIn(false);
     navigate("/login");
   };
 
-  <button type="button" onClick={handleLogout} className="logout-btn">
-    Logout
-  </button>;
+  const logoutButtonText = !isLoggedIn ? "Login" : "Logout";
   return (
     <div className="menu-wrap">
       <div className="menu-item">
@@ -42,15 +44,9 @@ const Menu = () => {
       <div className="menu-item">
         <Link to={"/register"}>Register</Link>
       </div>
-      {user ? (
-        <div className="menu-item" onClick={handleLogout}>
-          Logout
-        </div>
-      ) : (
-        <div className="menu-item">
-          <Link to={"/login"}>Login</Link>
-        </div>
-      )}
+      <button type="button" onClick={handleLogout} className="logout-btn">
+        {logoutButtonText}
+      </button>
     </div>
   );
 };

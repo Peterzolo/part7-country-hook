@@ -1,28 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import "../../components/BlogPost/Blog.css";
-import { getAllBlogs } from "../../services";
+import { useResource } from "../../hooks/CustomeHook";
 
-const BlogList = ({ user, setLoggedIn }) => {
-  const [blogs, setBlogs] = useState([]);
-  const [sortedBlogs, setSortedBlogs] = useState([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      const response = await getAllBlogs();
-      setBlogs(response);
-      const sortedResponse = [...response].sort((a, b) => b.likes - a.likes);
-      setSortedBlogs(sortedResponse);
-    }
-    fetchData();
-  }, []);
-
+const BlogList = () => {
+  const blogs = useResource().data;
   return (
     <div className="blog-wrapper">
       <h2 className="blog-title">Blog List</h2>
       <div className="blog-list-wrap">
-        {sortedBlogs &&
-          sortedBlogs.map((blog) => (
+        {blogs &&
+          blogs.map((blog) => (
             <div key={blog.id}>
               <ul className="blog-body">
                 <li className="blog-list">
