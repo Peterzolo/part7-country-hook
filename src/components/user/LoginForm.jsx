@@ -58,7 +58,7 @@ const LoginForm = () => {
         ) : (
           <ErrorNotification message={errorMessage} />
         )}
-        <label>Username</label>
+
         <input
           className="form-input"
           type="text"
@@ -67,7 +67,6 @@ const LoginForm = () => {
           onChange={(event) => setUsername(event.target.value)}
         />
 
-        <label>Password</label>
         <input
           className="form-input"
           type="password"

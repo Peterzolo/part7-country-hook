@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import Notification from "../notification/Notification";
 import ErrorNotification from "../notification/ErrorNotification";
-
 import "../../components/user/LoginForm.css";
-import { userLogIn } from "../../services/user.service";
-import { setToken } from "../../services/blog.service";
+import { userRegister } from "../../services/user.service";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
@@ -14,7 +12,6 @@ const Register = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   // eslint-disable-next-line no-unused-vars
-  const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -26,22 +23,16 @@ const Register = () => {
         name: name,
       };
 
-      const user = await userLogIn(userObject);
-
+      const user = await userRegister(userObject);
       if (user) {
-        window.localStorage.setItem("user", JSON.stringify(user));
-        window.localStorage.setItem("token", JSON.stringify(user.token));
-        const token = JSON.parse(localStorage.getItem("user")).token;
-        setToken(token);
-        setUser(user);
-
         setSuccessMessage("User registered in successfully");
         setTimeout(() => {
           setSuccessMessage("");
         }, 1000);
         setUsername("");
+        setName("");
         setPassword("");
-        navigate("/blogs/create");
+        navigate("/login");
       }
     } catch (exception) {
       setErrorMessage("Invalid credential");
@@ -72,9 +63,9 @@ const Register = () => {
         <input
           className="form-input"
           type="text"
-          value={password}
+          value={name}
           placeholder="Enter name here ..."
-          onChange={(event) => setPassword(event.target.value)}
+          onChange={(event) => setName(event.target.value)}
         />
         <input
           className="form-input"
