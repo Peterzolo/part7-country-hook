@@ -12,6 +12,12 @@ const Menu = () => {
       <div className="menu-item">
         <Link to={"/search"}>Search Country</Link>
       </div>
+      <div className="menu-item">
+        <Link to={"/blogs/create"}>Add Blog</Link>
+      </div>
+      <div className="menu-item">
+        <Link to={"/blogs"}>Blogs</Link>
+      </div>
     </div>
   );
 };

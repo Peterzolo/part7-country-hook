@@ -1,5 +1,6 @@
 import axios from "axios";
 const baseUrl = "https://restcountries.com/v3.1";
+const blogUrl = "http://localhost:5000/api/blogs";
 
 export const getAllCountries = async () => {
   const request = await axios.get(`${baseUrl}/all`);
@@ -9,4 +10,95 @@ export const getAllCountries = async () => {
 export const getCountryByName = async (name) => {
   const response = await axios.get(`${baseUrl}/name/${name}`);
   return response.data[0];
+};
+
+let token = null;
+
+export const setToken = (newToken) => {
+  token = `Bearer ${newToken}`;
+};
+
+export const addBlog = async (blogObject) => {
+  try {
+    const config = {
+      headers: { Authorization: token },
+    };
+
+    const response = await axios.post(blogUrl, blogObject, config);
+
+    return response.data.result;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const createBlog = async (blogPostData) => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const bearerToken = `Bearer ${user.token}`;
+
+  try {
+    const response = await axios.post(blogUrl, blogPostData, {
+      headers: {
+        Authorization: bearerToken,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getAllBlogs = async () => {
+  const response = await axios.get(blogUrl);
+  return response.data.result;
+};
+
+export const likePost2 = async (blogId) => {
+  try {
+    const token = JSON.parse(localStorage.getItem("token"));
+    const bearerToken = `Bearer ${token}`;
+    const response = await axios.put(`${blogUrl}/${blogId}/like`, {
+      headers: {
+        Authorization: bearerToken,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.log(error?.response?.data);
+  }
+};
+
+export const likePost = async (blogId) => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const bearerToken = `Bearer ${user.token}`;
+
+  try {
+    const response = await axios.put(
+      `${blogUrl}/${blogId}/like`,
+      {},
+      {
+        headers: {
+          Authorization: bearerToken,
+        },
+      }
+    );
+
+    return response;
+  } catch (error) {
+    console.log(error?.response?.data);
+  }
+};
+
+export const deleteBlog = async (blogId) => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const bearerToken = `Bearer ${user.token}`;
+
+  const response = await axios.delete(`${blogUrl}/delete/${blogId}`, {
+    headers: {
+      Authorization: bearerToken,
+    },
+  });
+
+  return response;
 };
