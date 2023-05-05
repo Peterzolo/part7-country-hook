@@ -1,0 +1,52 @@
+.menu-wrap {
+  padding: 20px;
+  display: flex;
+  justify-content: space-around;
+  background-color: aliceblue;
+}
+
+.search-wrap {
+  margin-top: 40px;
+}
+.search-form {
+  padding: 20px;
+  display: flex;
+  margin: 0 auto;
+  width: 600px;
+}
+.search-input {
+  height: 35px;
+  width: 300px;
+  text-align: center;
+  font-style: italic;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  background-color: rgb(171, 172, 173);
+  color: rgb(15, 14, 14);
+  border: none;
+}
+.search-btn {
+  width: 100px;
+  background-color: orange;
+  border: none;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.country-detail {
+  width: 800px;
+  margin: 0 auto;
+  /* background-color: antiquewhite; */
+  padding: 20px;
+}
+
+.country-title {
+  text-align: center;
+}
+
+.sub-container {
+  display: flex;
+  width: 700px;
+  justify-content: space-between;
+  align-items: center;
+}

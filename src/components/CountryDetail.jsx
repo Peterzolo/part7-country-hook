@@ -1,5 +1,6 @@
+import "../components/style/Styles.css";
+
 const CountryDetail = ({ country }) => {
-  console.log("RESPONSE COUNTRIES", country?.data);
   if (!country) {
     return null;
   }
@@ -10,15 +11,30 @@ const CountryDetail = ({ country }) => {
 
   return (
     <div>
-      <h3>Country Details</h3>
-      <h3>{country?.data?.name.common} </h3>
-      <div>capital {country.data.capital} </div>
-      <div>population {country.data.population}</div>
-      <img
-        src={country.data.flags.png}
-        height="100"
-        alt={`flag of ${country.data.name.common}`}
-      />
+      <h3 className="country-title">Country Details</h3>
+      <div className="sub-container">
+        <h3>Name:</h3>
+        <h3>{country?.data?.name.common} </h3>
+      </div>
+      <div className="sub-container">
+        <h3>Capital:</h3>
+        <h3>{country?.data?.capital} </h3>
+      </div>
+
+      <div className="sub-container">
+        <h3>Population:</h3>
+        <h3>{country?.data?.population} </h3>
+      </div>
+
+      <div className="sub-container">
+        <h3>Flag:</h3>
+
+        <img
+          src={country.data.flags.png}
+          height="100"
+          alt={`flag of ${country.data.name.common}`}
+        />
+      </div>
     </div>
   );
 };

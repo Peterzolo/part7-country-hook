@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "../components/style/Styles.css";
 
 const Menu = () => {
   return (
-    <div>
+    <div className="menu-wrap">
       <div className="menu-item">
         <Link to={"/:id"}>Country</Link>
       </div>
