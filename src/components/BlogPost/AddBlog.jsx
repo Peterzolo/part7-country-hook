@@ -5,16 +5,15 @@ import ErrorNotification from "../notification/ErrorNotification";
 import { createBlog, setToken } from "../../services";
 import { useField } from "../../hooks/CustomeHook";
 
+import "../../components/BlogPost/Blog.css";
+import { useNavigate } from "react-router-dom";
 const AddBlog = () => {
   const [successMessage, setSuccessMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
-  // const [title, setTitle] = useState("");
-  // const [url, setUrl] = useState("");
-  // eslint-disable-next-line no-unused-vars
   const title = useField("");
   const url = useField("");
   const [user, setUser] = useState("");
-  console.log("USER", user);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem("user");
@@ -35,14 +34,12 @@ const AddBlog = () => {
       };
 
       const response = await createBlog(newBlogObject);
-
       if (response) {
         setSuccessMessage("Blog successfully added");
         setTimeout(() => {
           setSuccessMessage(null);
         }, 1000);
-        title.value = "";
-        url.value = "";
+        navigate("/blogs");
       } else {
         setErrorMessage("Could not add blog");
         setTimeout(() => {

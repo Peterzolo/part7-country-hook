@@ -11,7 +11,7 @@ const BlogList = () => {
       <div className="blog-list-wrap">
         {blogs &&
           blogs.map((blog) => (
-            <div key={blog.id}>
+            <div key={blog.id} className="list-wrap">
               <ul className="blog-body">
                 <li className="blog-list">
                   <h5>{blog.title}</h5>{" "}

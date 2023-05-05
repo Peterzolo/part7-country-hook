@@ -6,7 +6,6 @@ const Menu = () => {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  console.log("USER----", user.username);
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -24,14 +23,14 @@ const Menu = () => {
     navigate("/login");
   };
 
-  const logoutButtonText = !isLoggedIn ? "Login" : "Logout";
+  const logoutButtonText = isLoggedIn ? "Logout" : "Login";
   return (
     <div className="menu-wrap">
       <div className="menu-item">
         <Link to={"/search"}>Search Country</Link>
       </div>
       <div className="menu-item">
-        {user === {} ? (
+        {isLoggedIn ? (
           <Link to={"/blogs/create"}>Add Blog</Link>
         ) : (
           <Link to={"/login"}>Add Blog</Link>
