@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../components/style/Styles.css";
 
 const Menu = () => {
   const [user, setUser] = useState({});
+  const navigate = useNavigate();
+  console.log("USER", typeof user);
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user) {
-      setUser(user);
+      setUser(user.toString());
     }
   }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
+    navigate("/login");
   };
 
   <button type="button" onClick={handleLogout} className="logout-btn">
@@ -26,7 +29,7 @@ const Menu = () => {
         <Link to={"/search"}>Search Country</Link>
       </div>
       <div className="menu-item">
-        {user ? (
+        {user === {} ? (
           <Link to={"/blogs/create"}>Add Blog</Link>
         ) : (
           <Link to={"/login"}>Add Blog</Link>
