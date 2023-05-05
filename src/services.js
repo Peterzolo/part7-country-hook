@@ -53,27 +53,6 @@ export const getAllBlogs = async () => {
   return response.data.result;
 };
 
-export const likePost = async (blogId) => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  const bearerToken = `Bearer ${user.token}`;
-
-  try {
-    const response = await axios.put(
-      `${blogUrl}/${blogId}/like`,
-      {},
-      {
-        headers: {
-          Authorization: bearerToken,
-        },
-      }
-    );
-
-    return response;
-  } catch (error) {
-    console.log(error?.response?.data);
-  }
-};
-
 export const deleteBlog = async (blogId) => {
   const user = JSON.parse(localStorage.getItem("user"));
   const bearerToken = `Bearer ${user.token}`;
