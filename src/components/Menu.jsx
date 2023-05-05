@@ -22,6 +22,9 @@ const Menu = () => {
       <div className="menu-item">
         <Link to={"/login"}>Login</Link>
       </div>
+      <div className="menu-item">
+        <Link to={"/register"}>Register</Link>
+      </div>
     </div>
   );
 };

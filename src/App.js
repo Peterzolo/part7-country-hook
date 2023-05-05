@@ -4,6 +4,7 @@ import Menu from "./components/Menu";
 import AddBlog from "./components/BlogPost/AddBlog";
 import BlogList from "./components/BlogPost/BlogList";
 import LoginForm from "./components/user/LoginForm";
+import Register from "./components/user/Register";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
           <Route path="/blogs" element={<BlogList />} />
           <Route path="/blogs/create" element={<AddBlog />} />
           <Route path="/login" element={<LoginForm />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </Router>
     </div>
