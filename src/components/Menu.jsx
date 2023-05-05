@@ -6,10 +6,6 @@ const Menu = () => {
   return (
     <div className="menu-wrap">
       <div className="menu-item">
-        <Link to={"/:id"}>Country</Link>
-      </div>
-
-      <div className="menu-item">
         <Link to={"/search"}>Search Country</Link>
       </div>
       <div className="menu-item">
