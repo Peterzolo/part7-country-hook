@@ -52,16 +52,3 @@ export const getAllBlogs = async () => {
   const response = await axios.get(blogUrl);
   return response.data.result;
 };
-
-export const deleteBlog = async (blogId) => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  const bearerToken = `Bearer ${user.token}`;
-
-  const response = await axios.delete(`${blogUrl}/delete/${blogId}`, {
-    headers: {
-      Authorization: bearerToken,
-    },
-  });
-
-  return response;
-};
