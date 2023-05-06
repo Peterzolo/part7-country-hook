@@ -1,5 +1,5 @@
 import { createBlog, getAllBlogs, getBlog } from "../../services/blog.service";
-import { addBlog, fetchBlogs } from "../reducers/blog/blogReducer";
+import { addBlog, fetchBlog, fetchBlogs } from "../reducers/blog/blogReducer";
 
 export const fetchBlogsFromService = () => {
   return async (dispatch) => {
@@ -17,6 +17,6 @@ export const createBlogFromService = (dataObject) => {
 export const getBlogFromService = (id) => {
   return async (dispatch) => {
     const response = await getBlog(id);
-    dispatch(addBlog(response));
+    dispatch(fetchBlog(response));
   };
 };
