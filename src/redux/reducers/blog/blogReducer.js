@@ -12,6 +12,9 @@ const blogSlice = createSlice({
     fetchBlogs: (state, action) => {
       state.blogs = action.payload;
     },
+    fetchBlog: (state, action) => {
+      state.blog = action.payload;
+    },
 
     addBlog: (state, action) => {
       state.content = action.payload;
