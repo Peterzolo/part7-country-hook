@@ -1,21 +1,16 @@
-import { createAnecdote } from "../../services/anecdoteService";
-import { getAllAnecdotes } from "../../services/anecdoteService";
-import {
-  addAnecdote,
-  voteAnecdote,
-} from "../reducers/anecdote/anecdoteReducer";
-import { fetchAnecdotes } from "../reducers/anecdote/anecdoteReducer";
+import { createBlog, getAllBlogs } from "../../services/blog.service";
+import { addBlog, fetchBlogs } from "../reducers/blog/blogReducer";
 
-export const fetchInitialAnecdotes = () => {
+export const fetchBlogsFromService = () => {
   return async (dispatch) => {
-    const response = await getAllAnecdotes();
-    dispatch(fetchAnecdotes(response));
+    const response = await getAllBlogs();
+    dispatch(fetchBlogs(response));
   };
 };
 
-export const createAnecdoteAction = (dataObject) => {
+export const createBlogFromService = (dataObject) => {
   return async (dispatch) => {
-    const response = await createAnecdote(dataObject);
-    dispatch(addAnecdote(response));
+    const response = await createBlog(dataObject);
+    dispatch(addBlog(response));
   };
 };
