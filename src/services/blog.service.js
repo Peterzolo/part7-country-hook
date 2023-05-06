@@ -95,5 +95,5 @@ export const deleteBlog = async (blogId) => {
 
 export const getBlog = async (blogId) => {
   const response = await axios.get(`${baseUrl}/${blogId}`);
-  return response.data;
+  return response.data.result;
 };
