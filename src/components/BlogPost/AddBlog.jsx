@@ -11,6 +11,7 @@ import {
   showError,
   showSuccess,
 } from "../../redux/reducers/notification/notificationReducer";
+import { createBlogFromService } from "../../redux/actions/blogAction";
 
 const AddBlog = () => {
   const title = useField("");
@@ -37,13 +38,14 @@ const AddBlog = () => {
         url: url.value,
       };
 
-      const response = await createBlog(newBlogObject);
-      if (response) {
+      const createdBlog = dispatch(createBlogFromService(newBlogObject));
+      if (createdBlog) {
         dispatch(showSuccess("Blog successfully added"));
         setTimeout(() => {
           dispatch(hideNotification());
         }, 5000);
-        navigate("/blogs");
+        // update component state with new blog data
+        navigate(`/blogs`);
       } else {
         dispatch(showError("Could not add blog"));
         setTimeout(() => {
