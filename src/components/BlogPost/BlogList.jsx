@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchBlogsFromService } from "../../redux/actions/blogAction";
 
 import "../../components/BlogPost/Blog.css";
-import { useResource } from "../../hooks/CustomeHook";
 
 const BlogList = () => {
-  const blogs = useResource().data;
+  const dispatch = useDispatch();
+  const blogs = useSelector((state) => state.blogs.blogs);
+
+  useEffect(() => {
+    dispatch(fetchBlogsFromService());
+  }, [dispatch]);
+
   return (
     <div className="blog-wrapper">
       <h2 className="blog-title">Blog List</h2>
