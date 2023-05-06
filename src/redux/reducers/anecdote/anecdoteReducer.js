@@ -1,41 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { voteAnecdoteAction } from "../../../services/anecdoteService";
 
-export const getId = () => (100000 * Math.random()).toFixed(0);
-
 const initialState = {
-  anecdotes: [],
-  filter: "",
+  blogs: [],
+  blog: {},
 };
 
-const anecdotesSlice = createSlice({
+const blogSlice = createSlice({
   name: "anecdotes",
   initialState,
   reducers: {
-    fetchAnecdotes: (state, action) => {
-      state.anecdotes = action.payload;
-    },
-    voteAnecdote: (state, action) => {
-      const id = action.payload.id;
-      const anecdoteToVote = state.anecdotes.find(
-        (anecdote) => anecdote.id === id
-      );
-      if (anecdoteToVote) {
-        anecdoteToVote.votes += 1;
-      }
-      voteAnecdoteAction(anecdoteToVote);
+    fetchBlogs: (state, action) => {
+      state.blogs = action.payload;
     },
 
-    addAnecdote: (state, action) => {
+    addBlog: (state, action) => {
       state.content = action.payload;
-    },
-    filterAnecdote: (state, action) => {
-      state.filter = action.payload.filter;
     },
   },
 });
 
-export const { fetchAnecdotes, voteAnecdote, addAnecdote, filterAnecdote } =
-  anecdotesSlice.actions;
+export const { fetchBlogs, addBlog } = blogSlice.actions;
 
-export default anecdotesSlice.reducer;
+export default blogSlice.reducer;
