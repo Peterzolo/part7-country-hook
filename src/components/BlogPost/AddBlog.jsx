@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from "react";
-
-import Notification from "../notification/Notification";
-import ErrorNotification from "../notification/ErrorNotification";
+import { useDispatch } from "react-redux"; // import the useDispatch hook
 import { createBlog, setToken } from "../../services";
 import { useField } from "../../hooks/CustomeHook";
+// import { showSuccess, showError } from "../../notificationSlice"; // import the showSuccess and showError actions
 
 import "../../components/BlogPost/Blog.css";
 import { useNavigate } from "react-router-dom";
+import {
+  hideNotification,
+  showError,
+  showSuccess,
+} from "../../redux/reducers/notification/notificationReducer";
+
 const AddBlog = () => {
-  const [successMessage, setSuccessMessage] = useState(null);
-  const [errorMessage, setErrorMessage] = useState(null);
   const title = useField("");
   const url = useField("");
   const [user, setUser] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem("user");
@@ -35,33 +39,28 @@ const AddBlog = () => {
 
       const response = await createBlog(newBlogObject);
       if (response) {
-        setSuccessMessage("Blog successfully added");
+        dispatch(showSuccess("Blog successfully added"));
         setTimeout(() => {
-          setSuccessMessage(null);
-        }, 1000);
+          dispatch(hideNotification());
+        }, 5000);
         navigate("/blogs");
       } else {
-        setErrorMessage("Could not add blog");
+        dispatch(showError("Could not add blog"));
         setTimeout(() => {
-          setErrorMessage(null);
-        }, 1000);
+          dispatch(hideNotification());
+        }, 5000);
       }
     } catch (error) {
-      setErrorMessage(error);
+      dispatch(showError(error.message));
       setTimeout(() => {
-        setErrorMessage(null);
+        dispatch(hideNotification());
       }, 5000);
     }
   };
 
   return (
     <div className="add-blog-wrapper">
-      {successMessage ? (
-        <Notification message={successMessage} />
-      ) : (
-        <ErrorNotification message={errorMessage} />
-      )}
-      <h2 className="create-blog-title">Creat A Blog</h2>
+      <h2 className="create-blog-title">Create A Blog</h2>
       <form className="form-wrap" onSubmit={handleSubmit}>
         <input
           className="add-blog-input"

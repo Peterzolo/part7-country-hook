@@ -1,30 +1,26 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+import "./Notification.css";
 import { hideNotification } from "../../redux/reducers/notification/notificationReducer";
 
 const Notification = () => {
-  const notification = useSelector((state) => state.notification.notification);
-  const isError = useSelector((state) => state.notification.isError);
-  const success = useSelector((state) => state.notification.notification);
   const dispatch = useDispatch();
+  const { notification, isError } = useSelector((state) => state.notification);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      dispatch(hideNotification());
-    }, 5000);
+    if (notification) {
+      const timeoutId = setTimeout(() => {
+        dispatch(hideNotification());
+      }, 3000);
 
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [success, dispatch]);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [notification, dispatch]);
 
   return (
-    <div className="notification-wrap">
-      {isError ? (
-        <p className="error">{notification}</p>
-      ) : (
-        <p className="success">{notification}</p>
-      )}
+    <div className={`notification ${isError ? "error" : "success"}`}>
+      {notification}
     </div>
   );
 };

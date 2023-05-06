@@ -5,12 +5,14 @@ import AddBlog from "./components/BlogPost/AddBlog";
 import BlogList from "./components/BlogPost/BlogList";
 import LoginForm from "./components/user/LoginForm";
 import Register from "./components/user/Register";
+import Notification from "./components/notification/Notification";
 
 const App = () => {
   return (
     <div>
       <Router>
         <Menu />
+        <Notification />
         <Routes>
           <Route path="/search" element={<SearchCountry />} />
           <Route path="/blogs" element={<BlogList />} />
