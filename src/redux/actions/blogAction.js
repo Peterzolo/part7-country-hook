@@ -19,9 +19,3 @@ export const createAnecdoteAction = (dataObject) => {
     dispatch(addAnecdote(response));
   };
 };
-
-export const voteAnecdoteActionCreator = (anecdote) => {
-  return async (dispatch) => {
-    dispatch(voteAnecdote(anecdote));
-  };
-};

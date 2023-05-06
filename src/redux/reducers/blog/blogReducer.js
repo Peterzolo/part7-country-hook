@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { voteAnecdoteAction } from "../../../services/anecdoteService";
 
 const initialState = {
   blogs: [],
@@ -7,7 +6,7 @@ const initialState = {
 };
 
 const blogSlice = createSlice({
-  name: "anecdotes",
+  name: "blogs",
   initialState,
   reducers: {
     fetchBlogs: (state, action) => {
