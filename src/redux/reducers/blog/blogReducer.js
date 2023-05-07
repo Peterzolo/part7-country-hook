@@ -19,6 +19,13 @@ const blogSlice = createSlice({
     addBlog: (state, action) => {
       state.content = action.payload;
     },
+    likeBlog: (state, action) => {
+      const blogId = action.payload;
+      const blog = state.blogs.find((blog) => blog.id === blogId);
+      if (blog) {
+        blog.likes += 1;
+      }
+    },
   },
 });
 

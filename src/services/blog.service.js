@@ -53,7 +53,7 @@ export const likePost2 = async (blogId) => {
       },
     });
 
-    return response.data;
+    return response.data.result;
   } catch (error) {
     console.log(error?.response?.data);
   }
@@ -74,7 +74,7 @@ export const likePost = async (blogId) => {
       }
     );
 
-    return response;
+    return response.data.result;
   } catch (error) {
     console.log(error?.response?.data);
   }

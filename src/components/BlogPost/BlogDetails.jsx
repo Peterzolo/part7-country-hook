@@ -22,8 +22,6 @@ const LikeButton = styled.button``;
 const BlogDetails = () => {
   const dispatch = useDispatch();
   const { blog } = useSelector((state) => state.blogs);
-  console.log("BLOG", blog);
-
   const { id } = useParams();
   useEffect(() => {
     const fetchBlogDetail = async () => {
