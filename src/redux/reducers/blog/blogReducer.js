@@ -25,6 +25,7 @@ const blogSlice = createSlice({
       if (blog) {
         blog.likes += 1;
       }
+      console.log("reducer", blog);
     },
   },
 });

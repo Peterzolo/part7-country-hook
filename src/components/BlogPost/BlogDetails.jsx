@@ -1,5 +1,8 @@
 import React, { useEffect } from "react";
-import { getBlogFromService } from "../../redux/actions/blogAction";
+import {
+  getBlogFromService,
+  likeBlogFromService,
+} from "../../redux/actions/blogAction";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -30,15 +33,18 @@ const BlogDetails = () => {
     fetchBlogDetail();
   }, [dispatch, id]);
 
+  const handleLike = async () => {
+    dispatch(likeBlogFromService(blog.id));
+  };
+
   return (
     <BlogDetailWrap>
       <Title>{blog?.title}</Title>
       <Author>{blog.auth}</Author>
       <Url>{blog.url}</Url>
       <LikeWrap>
-        <LikeCount>{blog.likes}</LikeCount>
-        <LikeTitle>Likes</LikeTitle>
-        <LikeButton onClick={handlelike}>likes</LikeButton>
+        <LikeCount>Likes:{blog.likes}</LikeCount>
+        <LikeButton onClick={handleLike}>likes</LikeButton>
       </LikeWrap>
     </BlogDetailWrap>
   );
