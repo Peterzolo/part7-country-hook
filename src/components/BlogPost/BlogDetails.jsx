@@ -38,7 +38,7 @@ const BlogDetails = () => {
       <LikeWrap>
         <LikeCount>{blog.likes}</LikeCount>
         <LikeTitle>Likes</LikeTitle>
-        <LikeButton>likes</LikeButton>
+        <LikeButton onClick={handlelike}>likes</LikeButton>
       </LikeWrap>
     </BlogDetailWrap>
   );
