@@ -25,6 +25,7 @@ const LikeButton = styled.button``;
 const BlogDetails = () => {
   const dispatch = useDispatch();
   const { blog } = useSelector((state) => state.blogs);
+  console.log("BOLG", blog);
   const { id } = useParams();
   useEffect(() => {
     const fetchBlogDetail = async () => {
@@ -34,6 +35,7 @@ const BlogDetails = () => {
   }, [dispatch, id]);
 
   const handleLike = async () => {
+    console.log("BLOG ID", blog.id);
     dispatch(likeBlogFromService(blog.id));
   };
 

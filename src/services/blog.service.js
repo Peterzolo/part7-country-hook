@@ -43,7 +43,7 @@ export const getAllBlogs = async () => {
   return response.data.result;
 };
 
-export const likeAPost = async (blogId) => {
+export const likePost = async (blogId) => {
   const user = JSON.parse(localStorage.getItem("user"));
   const bearerToken = `Bearer ${user.token}`;
 
@@ -57,9 +57,8 @@ export const likeAPost = async (blogId) => {
         },
       }
     );
-
-    console.log("RESP", response.data.result);
-    return response.data.result;
+    console.log("GOT HERE");
+    return response;
   } catch (error) {
     console.log(error?.response?.data);
   }

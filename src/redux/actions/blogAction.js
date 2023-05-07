@@ -2,7 +2,6 @@ import {
   createBlog,
   getAllBlogs,
   getBlog,
-  likeAPost,
   likePost,
 } from "../../services/blog.service";
 import {
@@ -34,15 +33,12 @@ export const getBlogFromService = (id) => {
 
 export const likeBlogFromService = (id) => {
   return async (dispatch) => {
-    const response = await likeAPost(id);
-    console.log("ACTION RESPONSE", response);
-    dispatch(likeBlog(response));
+    try {
+      const result = await likePost(id);
+      console.log("RESULT", result);
+      dispatch(likeBlog(id));
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
-
-// export const likeBlogFromService = (id) => {
-//   return async (dispatch) => {
-//     const response = await likePost(id);
-//     dispatch(likeBlog(id));
-//   };
-// };
