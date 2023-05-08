@@ -1,9 +1,15 @@
 import {
+  fetchAUser,
+  fetchAllUsers,
   fetchUser,
   loginUser,
   registerUser,
 } from "../../services/user.service";
 import {
+  getAllUserFail,
+  getAllUserSuccess,
+  getAllUsers,
+  getUser,
   getUserFail,
   getUserSuccess,
   signin,
@@ -43,13 +49,27 @@ export const userLoginFromService = (loginData) => {
 
 export const getUserFromService = (id) => {
   return async (dispatch) => {
-    dispatch();
+    dispatch(getUser());
     try {
-      const response = await fetchUser(id);
+      const response = await fetchAUser(id);
+      console.log("ACTION USER", response);
       dispatch(getUserSuccess(response));
       return response;
     } catch (error) {
       dispatch(getUserFail(error.message));
+    }
+  };
+};
+export const getAllUserFromService = (id) => {
+  return async (dispatch) => {
+    dispatch(getAllUsers());
+    try {
+      const response = await fetchAllUsers(id);
+      console.log("ACTION USER", response);
+      dispatch(getAllUserSuccess(response));
+      return response;
+    } catch (error) {
+      dispatch(getAllUserFail(error.message));
     }
   };
 };

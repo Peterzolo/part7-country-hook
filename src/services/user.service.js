@@ -18,8 +18,13 @@ export const registerUser = async (userObject) => {
 
   return response.data;
 };
-export const fetchUser = async (id) => {
-  const response = await axios.post(`${baseUrl}/users`, id);
-  console.log("REGISTER", response.data);
+export const fetchAUser = async (id) => {
+  const response = await axios.post(`${baseUrl}/users/${id}`);
+  console.log("FETCH USER", response.data);
+  return response.data.result;
+};
+export const fetchAllUsers = async () => {
+  const response = await axios.post(`${baseUrl}/users`);
+  console.log("FETCH USER", response.data);
   return response.data.result;
 };
