@@ -8,6 +8,7 @@ import Register from "./components/user/Register";
 import Notification from "./components/notification/Notification";
 import BlogDetails from "./components/BlogPost/BlogDetails";
 import UserDetails from "./components/user/UserDetails";
+import UserList from "./components/user/UserList";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="/login" element={<LoginForm />} />
           <Route path="/register" element={<Register />} />
           <Route path="/users/:id" element={<UserDetails />} />
+          <Route path="/users/" element={<UserList />} />
         </Routes>
       </Router>
     </div>

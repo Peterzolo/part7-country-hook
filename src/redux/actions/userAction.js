@@ -1,7 +1,6 @@
 import {
   fetchAUser,
   fetchAllUsers,
-  fetchUser,
   loginUser,
   registerUser,
 } from "../../services/user.service";
@@ -65,7 +64,7 @@ export const getAllUserFromService = (id) => {
     dispatch(getAllUsers());
     try {
       const response = await fetchAllUsers(id);
-      console.log("ACTION USER", response);
+      console.log("ACTION USERs", response);
       dispatch(getAllUserSuccess(response));
       return response;
     } catch (error) {

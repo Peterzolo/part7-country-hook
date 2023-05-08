@@ -4,7 +4,6 @@ import "../components/style/Styles.css";
 
 const Menu = () => {
   const [user, setUser] = useState({});
-  console.log("USER", user);
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
