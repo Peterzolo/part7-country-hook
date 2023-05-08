@@ -17,16 +17,23 @@ const BlogDetailWrap = styled.div``;
 const Title = styled.h2``;
 const Author = styled.h3``;
 const Url = styled.p``;
+const ButtonGroup = styled.div`
+  display: flex;
+  width: 400px;
+  align-items: center;
+  justify-content: space-between;
+`;
 const LikeWrap = styled.div`
   display: flex;
   width: 200px;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
+  /* padding: 10px; */
 `;
 const LikeCount = styled.h5``;
 const LikeTitle = styled.h6``;
 const LikeButton = styled.button``;
+const DeleteButton = styled.button``;
 
 const BlogDetails = () => {
   const dispatch = useDispatch();
@@ -99,26 +106,26 @@ const BlogDetails = () => {
       <Title>{blog?.title}</Title>
       <Author>{blog.auth}</Author>
       <Url>{blog.url}</Url>
-      <LikeWrap>
-        <LikeCount>Likes:{blog.likes}</LikeCount>
-        <LikeButton
-          className={disabled ? "like-btn-disabled" : "like-btn-enabled"}
-          onClick={handleLike}
-          disabled={!isLoggedIn}
-        >
-          Like
-        </LikeButton>
-      </LikeWrap>
-      <LikeWrap>
-        <LikeCount>Likes:{blog.likes}</LikeCount>
-        <LikeButton
+      <ButtonGroup>
+        <LikeWrap>
+          <LikeCount>Likes:{blog.likes}</LikeCount>
+          <LikeButton
+            className={disabled ? "like-btn-disabled" : "like-btn-enabled"}
+            onClick={handleLike}
+            disabled={!isLoggedIn}
+          >
+            Like
+          </LikeButton>
+        </LikeWrap>
+
+        <DeleteButton
           className={disabled ? "delete-btn-disabled" : "delete-btn-enabled"}
           onClick={handleDelete}
           disabled={!isLoggedIn}
         >
           Delete
-        </LikeButton>
-      </LikeWrap>
+        </DeleteButton>
+      </ButtonGroup>
     </BlogDetailWrap>
   );
 };
