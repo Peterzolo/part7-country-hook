@@ -57,3 +57,18 @@
 .list-wrap {
   display: flex;
 }
+
+.like-btn-enabled {
+  background-color: rgb(59, 58, 58);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+}
+.like-btn-disabled {
+  background-color: rgb(234, 228, 228);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+}
