@@ -1,4 +1,8 @@
-import { loginUser, registerUser } from "../../services/user.service";
+import {
+  fetchUser,
+  loginUser,
+  registerUser,
+} from "../../services/user.service";
 import {
   signin,
   signinFail,
@@ -31,6 +35,19 @@ export const userLoginFromService = (loginData) => {
       return response;
     } catch (error) {
       dispatch(signinFail(error.message));
+    }
+  };
+};
+
+export const getUserFromService = (id) => {
+  return async (dispatch) => {
+    dispatch();
+    try {
+      const response = await fetchUser(id);
+      dispatch();
+      return response;
+    } catch (error) {
+      dispatch();
     }
   };
 };

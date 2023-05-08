@@ -10,11 +10,16 @@ export const setToken = (newToken) => {
 
 export const loginUser = async (userObject) => {
   const response = await axios.post(`${baseUrl}/login`, userObject);
-  console.log("RESPONSE", response.data);
+
   return response.data;
 };
 export const registerUser = async (userObject) => {
   const response = await axios.post(`${baseUrl}/users`, userObject);
-  console.log("REGISTER", response.data);
+
   return response.data;
+};
+export const fetchUser = async (id) => {
+  const response = await axios.post(`${baseUrl}/users`, id);
+  console.log("REGISTER", response.data);
+  return response.data.result;
 };
