@@ -123,21 +123,21 @@ const BlogDetails = () => {
         content: content,
         id: blog.id,
       };
-      const result = dispatch(commentBlogFromService(newContent));
+      const result = await dispatch(commentBlogFromService(blog.id, content));
       if (result) {
-        dispatch(showSuccess("Blog successfully liked"));
+        dispatch(showSuccess("Comment successfully added"));
         setTimeout(() => {
           dispatch(hideNotification());
         }, 5000);
         navigate(`/`);
       } else {
-        dispatch(showError("Could not like blog"));
+        dispatch(showError("Could not add comment"));
         setTimeout(() => {
           dispatch(hideNotification());
         }, 5000);
       }
     } catch (error) {
-      dispatch(showError("Could not like blog"));
+      dispatch(showError(error.message));
       setTimeout(() => {
         dispatch(hideNotification());
       }, 5000);
@@ -186,7 +186,7 @@ const BlogDetails = () => {
         <CommentBody>
           {blog.comments &&
             blog.comments.map((comment) => (
-              <CommentBody key={comment.id}>{comment.content}</CommentBody>
+              <CommentBody key={comment._id}>{comment.content}</CommentBody>
             ))}
         </CommentBody>
       </CommentWrap>
