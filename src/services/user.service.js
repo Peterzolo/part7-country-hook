@@ -21,11 +21,11 @@ export const registerUser = async (userObject) => {
 };
 export const fetchAUser = async (id) => {
   const response = await axios.get(`${baseUrl}/${id}`);
-  console.log("FETCH USER", response.data);
+
   return response.data.result;
 };
 export const fetchAllUsers = async () => {
   const response = await axios.get(baseUrl);
-  console.log("FETCH USERS", response);
+
   return response.data;
 };

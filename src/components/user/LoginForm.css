@@ -53,3 +53,22 @@
   display: flex;
   justify-content: space-between;
 }
+
+.user-detail-wrap {
+  width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.user-detail-title {
+  text-align: center;
+}
+
+.content-wrap {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid orange;
+  padding: 20px;
+}

@@ -51,7 +51,7 @@ export const getUserFromService = (id) => {
     dispatch(getUser());
     try {
       const response = await fetchAUser(id);
-      console.log("ACTION USER", response);
+
       dispatch(getUserSuccess(response));
       return response;
     } catch (error) {
@@ -64,7 +64,7 @@ export const getAllUserFromService = (id) => {
     dispatch(getAllUsers());
     try {
       const response = await fetchAllUsers(id);
-      console.log("ACTION USERs", response);
+
       dispatch(getAllUserSuccess(response));
       return response;
     } catch (error) {

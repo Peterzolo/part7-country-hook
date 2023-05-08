@@ -4,6 +4,7 @@ import { getAllUserFromService } from "../../redux/actions/userAction";
 import Table from "react-bootstrap/Table";
 
 import "../user/LoginForm.css";
+import { Link } from "react-router-dom";
 
 const UserList = () => {
   const dispatch = useDispatch();
@@ -25,7 +26,11 @@ const UserList = () => {
           {users &&
             users.map((user) => (
               <tr key={user.id}>
-                <td>{user.name}</td>
+                <td>
+                  <Link Link to={`/users/${user.id}`}>
+                    {user.name}
+                  </Link>
+                </td>
                 <td>{user.blogs.length}</td>
               </tr>
             ))}
