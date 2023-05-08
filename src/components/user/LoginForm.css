@@ -40,3 +40,16 @@
   background-color: #0958d9;
   border-radius: 10px;
 }
+
+.user-list-wrap {
+  display: flex;
+  width: 700px;
+  margin: 0 auto;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.table-head {
+  display: flex;
+  justify-content: space-between;
+}

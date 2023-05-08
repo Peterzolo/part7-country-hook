@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUserFromService } from "../../redux/actions/userAction";
+import Table from "react-bootstrap/Table";
+
+import "../user/LoginForm.css";
 
 const UserList = () => {
   const dispatch = useDispatch();
@@ -10,15 +13,41 @@ const UserList = () => {
     dispatch(getAllUserFromService());
   }, [dispatch]);
   return (
-    <div>
-      <h1>User List</h1>
-      {/* {users &&
-        users.map((user) => (
-          <div key={user.id}>
-            <h2>{user.name}</h2>
-            <p>{user.email}</p>
-          </div>
-        ))} */}
+    <div className="user-list-wrap">
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>Author's Name</th>
+            <th>Blogs created</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users &&
+            users.map((user) => (
+              <tr key={user.id}>
+                <td>{user.name}</td>
+                <td>{user.blogs.length}</td>
+              </tr>
+            ))}
+        </tbody>
+      </Table>
+      {/* <table>
+        <thead className="table-head">
+          <tr>
+            <th>Author</th>
+            <th>Created blogs</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users &&
+            users.map((user) => (
+              <tr key={user.id}>
+                <td>{user.name}</td>
+                <td>{user.blogs.length}</td>
+              </tr>
+            ))}
+        </tbody>
+      </table> */}
     </div>
   );
 };
