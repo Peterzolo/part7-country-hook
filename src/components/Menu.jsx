@@ -37,7 +37,7 @@ const Menu = () => {
         )}
       </div>
       <div className="menu-item">
-        <Link to={"/blogs"}>Blogs</Link>
+        <Link to={"/"}>Blogs</Link>
       </div>
 
       <div className="menu-item">

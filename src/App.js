@@ -16,7 +16,7 @@ const App = () => {
         <Notification />
         <Routes>
           <Route path="/search" element={<SearchCountry />} />
-          <Route path="/blogs" element={<BlogList />} />
+          <Route path="/" element={<BlogList />} />
           <Route path="/blogs/:id" element={<BlogDetails />} />
           <Route path="/blogs/create" element={<AddBlog />} />
           <Route path="/login" element={<LoginForm />} />

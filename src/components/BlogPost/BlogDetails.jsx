@@ -1,11 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   getBlogFromService,
   likeBlogFromService,
 } from "../../redux/actions/blogAction";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import {
+  hideNotification,
+  showError,
+  showSuccess,
+} from "../../redux/reducers/notification/notificationReducer";
 
 const BlogDetailWrap = styled.div``;
 const Title = styled.h2``;
@@ -25,8 +30,20 @@ const LikeButton = styled.button``;
 const BlogDetails = () => {
   const dispatch = useDispatch();
   const { blog } = useSelector((state) => state.blogs);
-  console.log("BOLG", blog);
+  const navigate = useNavigate();
   const { id } = useParams();
+
+  const [user, setUser] = useState({});
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [disabled, setDisabled] = useState(!isLoggedIn);
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      setUser(user);
+      setIsLoggedIn(true);
+    }
+  }, []);
   useEffect(() => {
     const fetchBlogDetail = async () => {
       dispatch(getBlogFromService(id));
@@ -34,9 +51,28 @@ const BlogDetails = () => {
     fetchBlogDetail();
   }, [dispatch, id]);
 
+  useEffect(() => {
+    setDisabled(!isLoggedIn);
+  }, [isLoggedIn]);
+
   const handleLike = async () => {
-    console.log("BLOG ID", blog.id);
-    dispatch(likeBlogFromService(blog.id));
+    try {
+      const liked = dispatch(likeBlogFromService(blog.id));
+      if (liked) {
+        dispatch(showSuccess("Blog successfully liked"));
+        setTimeout(() => {
+          dispatch(hideNotification());
+        }, 5000);
+        navigate(`/`);
+      } else {
+        dispatch(showError("Could not like blog"));
+        setTimeout(() => {
+          dispatch(hideNotification());
+        }, 5000);
+      }
+    } catch (error) {
+      console.log("BLOG ID", blog.id);
+    }
   };
 
   return (
@@ -46,7 +82,13 @@ const BlogDetails = () => {
       <Url>{blog.url}</Url>
       <LikeWrap>
         <LikeCount>Likes:{blog.likes}</LikeCount>
-        <LikeButton onClick={handleLike}>likes</LikeButton>
+        <LikeButton
+          className={disabled ? "like-btn-disabled" : "like-btn-enabled"}
+          onClick={handleLike}
+          disabled={!isLoggedIn}
+        >
+          Like
+        </LikeButton>
       </LikeWrap>
     </BlogDetailWrap>
   );

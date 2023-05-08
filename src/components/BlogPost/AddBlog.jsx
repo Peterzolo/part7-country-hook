@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux"; // import the useDispatch hook
+import { useDispatch } from "react-redux";
 import { createBlog, setToken } from "../../services";
 import { useField } from "../../hooks/CustomeHook";
-// import { showSuccess, showError } from "../../notificationSlice"; // import the showSuccess and showError actions
 
 import "../../components/BlogPost/Blog.css";
 import { useNavigate } from "react-router-dom";

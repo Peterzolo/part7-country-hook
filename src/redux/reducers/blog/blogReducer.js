@@ -21,9 +21,7 @@ const blogSlice = createSlice({
     },
     likeBlog: (state, action) => {
       const blogId = action.payload;
-      console.log("BLOGID", blogId);
       const blog = state.blogs.find((blog) => blog.id === blogId);
-      console.log("BLOG", blog);
       if (blog) {
         blog.likes += 1;
       }
