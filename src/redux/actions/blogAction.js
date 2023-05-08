@@ -56,11 +56,11 @@ export const deleteBlogFromService = (id) => {
   };
 };
 
-export const commentBlogFromService = (id) => {
+export const commentBlogFromService = (blogId, commentText) => {
   return async (dispatch) => {
     try {
-      const result = await commentOnBlog(id);
-      dispatch(addCommentToBlog(id));
+      const result = await commentOnBlog(blogId, commentText);
+      dispatch(addCommentToBlog({ blogId, content: result }));
       return result;
     } catch (error) {
       console.log(error);

@@ -36,9 +36,11 @@ const blogSlice = createSlice({
     },
     addCommentToBlog: (state, action) => {
       const { blogId, content } = action.payload;
-      const blog = state.blogs.find((blog) => blog.id === blogId);
-      if (blog) {
+      const blogIndex = state.blogs.findIndex((blog) => blog.id === blogId);
+      if (blogIndex !== -1) {
+        const blog = state.blogs[blogIndex];
         blog.comments.push(content);
+        state.blogs[blogIndex] = blog;
       }
     },
   },

@@ -46,10 +46,12 @@ const CommentForm = styled.form``;
 const CommentInput = styled.input``;
 
 const CommentBtn = styled.button``;
+const CommentBody = styled.div``;
 
 const BlogDetails = () => {
   const dispatch = useDispatch();
   const { blog } = useSelector((state) => state.blogs);
+  console.log("BLOG----", blog.comments?.content);
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -114,13 +116,14 @@ const BlogDetails = () => {
     }
   };
 
-  const handleComment = async (e) => {
+  const handleCommentSubmit = async (e) => {
     e.preventDefault();
     try {
       const newContent = {
         content: content,
+        id: blog.id,
       };
-      const result = await dispatch(commentBlogFromService(newContent));
+      const result = dispatch(commentBlogFromService(newContent));
       if (result) {
         dispatch(showSuccess("Blog successfully liked"));
         setTimeout(() => {
@@ -143,6 +146,7 @@ const BlogDetails = () => {
 
   return (
     <BlogDetailWrap>
+      {!isLoggedIn && <div>Log in to comment and like</div>}
       <Title>Title : {blog?.title}</Title>
       <Author>Author: {blog.author}</Author>
       <Url>url: {blog.url}</Url>
@@ -167,15 +171,24 @@ const BlogDetails = () => {
         </DeleteButton>
       </ButtonGroup>
       <CommentWrap>
-        <CommentForm>
+        <CommentForm onSubmit={handleCommentSubmit}>
           <CommentInput
             type="texr"
             placeholder="Add your comment here ..."
             value={content}
-            onClick={handleComment}
+            onChange={(e) => setContent(e.target.value)}
+            disabled={!isLoggedIn}
           />
-          <CommentBtn>Add Comment</CommentBtn>
+          <CommentBtn type="submit" disabled={!isLoggedIn}>
+            Add Comment
+          </CommentBtn>
         </CommentForm>
+        <CommentBody>
+          {blog.comments &&
+            blog.comments.map((comment) => (
+              <CommentBody key={comment.id}>{comment.content}</CommentBody>
+            ))}
+        </CommentBody>
       </CommentWrap>
     </BlogDetailWrap>
   );
