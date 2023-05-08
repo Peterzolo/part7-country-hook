@@ -13,9 +13,14 @@ import {
   showSuccess,
 } from "../../redux/reducers/notification/notificationReducer";
 
-const BlogDetailWrap = styled.div``;
+const BlogDetailWrap = styled.div`
+  width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fafafa;
+`;
 const Title = styled.h2``;
-const Author = styled.h3``;
+const Author = styled.h5``;
 const Url = styled.p``;
 const ButtonGroup = styled.div`
   display: flex;
@@ -103,9 +108,9 @@ const BlogDetails = () => {
 
   return (
     <BlogDetailWrap>
-      <Title>{blog?.title}</Title>
-      <Author>{blog.auth}</Author>
-      <Url>{blog.url}</Url>
+      <Title>Title : {blog?.title}</Title>
+      <Author>Author: {blog.author}</Author>
+      <Url>url: {blog.url}</Url>
       <ButtonGroup>
         <LikeWrap>
           <LikeCount>Likes:{blog.likes}</LikeCount>

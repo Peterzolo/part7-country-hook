@@ -17,11 +17,16 @@ const blogSlice = createSlice({
     },
 
     addBlog: (state, action) => {
-      state.content = action.payload;
+      state.blogs.push(action.payload);
     },
     deleteABlog: (state, action) => {
-      state.content = action.payload;
+      const blogId = action.payload;
+      const index = state.blogs.findIndex((blog) => blog.id === blogId);
+      if (index !== -1) {
+        state.blogs.splice(index, 1);
+      }
     },
+
     likeBlog: (state, action) => {
       const blogId = action.payload;
       const blog = state.blogs.find((blog) => blog.id === blogId);
