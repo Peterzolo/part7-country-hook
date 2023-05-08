@@ -71,7 +71,10 @@ const BlogDetails = () => {
         }, 5000);
       }
     } catch (error) {
-      console.log("BLOG ID", blog.id);
+      dispatch(showError(error));
+      setTimeout(() => {
+        dispatch(hideNotification());
+      }, 5000);
     }
   };
 
