@@ -4,6 +4,8 @@ import {
   registerUser,
 } from "../../services/user.service";
 import {
+  getUserFail,
+  getUserSuccess,
   signin,
   signinFail,
   signinSuccess,
@@ -44,10 +46,10 @@ export const getUserFromService = (id) => {
     dispatch();
     try {
       const response = await fetchUser(id);
-      dispatch();
+      dispatch(getUserSuccess(response));
       return response;
     } catch (error) {
-      dispatch();
+      dispatch(getUserFail(error.message));
     }
   };
 };
