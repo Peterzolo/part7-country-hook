@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
+  commentBlogFromService,
   deleteBlogFromService,
   getBlogFromService,
   likeBlogFromService,
@@ -55,6 +56,7 @@ const BlogDetails = () => {
   const [user, setUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [disabled, setDisabled] = useState(!isLoggedIn);
+  const [content, setContent] = useState("");
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -114,6 +116,29 @@ const BlogDetails = () => {
 
   const handleComment = async (e) => {
     e.preventDefault();
+    try {
+      const newContent = {
+        content: content,
+      };
+      const result = await dispatch(commentBlogFromService(newContent));
+      if (result) {
+        dispatch(showSuccess("Blog successfully liked"));
+        setTimeout(() => {
+          dispatch(hideNotification());
+        }, 5000);
+        navigate(`/`);
+      } else {
+        dispatch(showError("Could not like blog"));
+        setTimeout(() => {
+          dispatch(hideNotification());
+        }, 5000);
+      }
+    } catch (error) {
+      dispatch(showError("Could not like blog"));
+      setTimeout(() => {
+        dispatch(hideNotification());
+      }, 5000);
+    }
   };
 
   return (
@@ -146,7 +171,7 @@ const BlogDetails = () => {
           <CommentInput
             type="texr"
             placeholder="Add your comment here ..."
-            value={""}
+            value={content}
             onClick={handleComment}
           />
           <CommentBtn>Add Comment</CommentBtn>
