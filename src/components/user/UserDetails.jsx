@@ -13,10 +13,6 @@ const UserDetails = () => {
   const { user } = useSelector((state) => state.users);
   const { id } = useParams();
 
-  // const userBlogs = user.blogs.map((blog) => blog.title);
-
-  console.log("USER BLOGS", user);
-
   useEffect(() => {
     const fetchUserDetails = async () => {
       const user = await dispatch(getUserFromService(id));

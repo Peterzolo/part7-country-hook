@@ -57,7 +57,26 @@ export const likePost = async (blogId) => {
         },
       }
     );
-    console.log("GOT HERE");
+    return response;
+  } catch (error) {
+    console.log(error?.response?.data);
+  }
+};
+
+export const commentOnBlog = async (blogId, commentText) => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const bearerToken = `Bearer ${user.token}`;
+
+  try {
+    const response = await axios.post(
+      `${baseUrl}/${blogId}/comment`,
+      { comment: commentText },
+      {
+        headers: {
+          Authorization: bearerToken,
+        },
+      }
+    );
     return response;
   } catch (error) {
     console.log(error?.response?.data);

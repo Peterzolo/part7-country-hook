@@ -55,7 +55,6 @@ const Menu = () => {
           <div className="user-name">logged in as : {user.name}</div>
         )}
       </div>
-
       <button type="button" onClick={handleLogout} className="logout-btn">
         {logoutButtonText}
       </button>
