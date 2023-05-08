@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
+  deleteBlogFromService,
   getBlogFromService,
   likeBlogFromService,
 } from "../../redux/actions/blogAction";
@@ -77,6 +78,21 @@ const BlogDetails = () => {
       }, 5000);
     }
   };
+  const handleDelete = async () => {
+    try {
+      await dispatch(deleteBlogFromService(id));
+      dispatch(showSuccess("Blog successfully deleted"));
+      setTimeout(() => {
+        dispatch(hideNotification());
+      }, 5000);
+      navigate(`/`);
+    } catch (error) {
+      dispatch(showError(error));
+      setTimeout(() => {
+        dispatch(hideNotification());
+      }, 5000);
+    }
+  };
 
   return (
     <BlogDetailWrap>
@@ -91,6 +107,16 @@ const BlogDetails = () => {
           disabled={!isLoggedIn}
         >
           Like
+        </LikeButton>
+      </LikeWrap>
+      <LikeWrap>
+        <LikeCount>Likes:{blog.likes}</LikeCount>
+        <LikeButton
+          className={disabled ? "delete-btn-disabled" : "delete-btn-enabled"}
+          onClick={handleDelete}
+          disabled={!isLoggedIn}
+        >
+          Delete
         </LikeButton>
       </LikeWrap>
     </BlogDetailWrap>

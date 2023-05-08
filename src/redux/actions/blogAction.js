@@ -1,11 +1,13 @@
 import {
   createBlog,
+  deleteBlog,
   getAllBlogs,
   getBlog,
   likePost,
 } from "../../services/blog.service";
 import {
   addBlog,
+  deleteABlog,
   fetchBlog,
   fetchBlogs,
   likeBlog,
@@ -37,6 +39,17 @@ export const likeBlogFromService = (id) => {
       const result = await likePost(id);
       console.log("RESULT", result);
       dispatch(likeBlog(id));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const deleteBlogFromService = (id) => {
+  return async (dispatch) => {
+    try {
+      const result = await deleteBlog(id);
+      console.log("RESULT", result);
+      dispatch(deleteABlog(id));
     } catch (error) {
       console.log(error);
     }
