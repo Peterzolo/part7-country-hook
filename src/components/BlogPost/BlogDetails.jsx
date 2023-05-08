@@ -112,6 +112,10 @@ const BlogDetails = () => {
     }
   };
 
+  const handleComment = async (e) => {
+    e.preventDefault();
+  };
+
   return (
     <BlogDetailWrap>
       <Title>Title : {blog?.title}</Title>
@@ -139,7 +143,12 @@ const BlogDetails = () => {
       </ButtonGroup>
       <CommentWrap>
         <CommentForm>
-          <CommentInput />
+          <CommentInput
+            type="texr"
+            placeholder="Add your comment here ..."
+            value={""}
+            onClick={handleComment}
+          />
           <CommentBtn>Add Comment</CommentBtn>
         </CommentForm>
       </CommentWrap>
