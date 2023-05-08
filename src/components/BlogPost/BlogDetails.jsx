@@ -40,6 +40,12 @@ const LikeTitle = styled.h6``;
 const LikeButton = styled.button``;
 const DeleteButton = styled.button``;
 
+const CommentWrap = styled.div``;
+const CommentForm = styled.form``;
+const CommentInput = styled.input``;
+
+const CommentBtn = styled.button``;
+
 const BlogDetails = () => {
   const dispatch = useDispatch();
   const { blog } = useSelector((state) => state.blogs);
@@ -131,6 +137,12 @@ const BlogDetails = () => {
           Delete
         </DeleteButton>
       </ButtonGroup>
+      <CommentWrap>
+        <CommentForm>
+          <CommentInput />
+          <CommentBtn>Add Comment</CommentBtn>
+        </CommentForm>
+      </CommentWrap>
     </BlogDetailWrap>
   );
 };

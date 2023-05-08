@@ -1,4 +1,5 @@
 import {
+  commentOnBlog,
   createBlog,
   deleteBlog,
   getAllBlogs,
@@ -7,6 +8,7 @@ import {
 } from "../../services/blog.service";
 import {
   addBlog,
+  addCommentToBlog,
   deleteABlog,
   fetchBlog,
   fetchBlogs,
@@ -37,7 +39,6 @@ export const likeBlogFromService = (id) => {
   return async (dispatch) => {
     try {
       const result = await likePost(id);
-      console.log("RESULT", result);
       dispatch(likeBlog(id));
     } catch (error) {
       console.log(error);
@@ -48,8 +49,19 @@ export const deleteBlogFromService = (id) => {
   return async (dispatch) => {
     try {
       const result = await deleteBlog(id);
-      console.log("RESULT", result);
       dispatch(deleteABlog(id));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const commentBlogFromService = (id) => {
+  return async (dispatch) => {
+    try {
+      const result = await commentOnBlog(id);
+      dispatch(addCommentToBlog(id));
+      return result;
     } catch (error) {
       console.log(error);
     }
