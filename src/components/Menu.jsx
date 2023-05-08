@@ -45,16 +45,17 @@ const Menu = () => {
       </div>
       <div className="loggedin-user">
         {isLoggedIn && (
-          <div className="user-name">logged in as : {user.name}</div>
-        )}
-      </div>
-      <div className="loggedin-user">
-        {isLoggedIn && (
           <div className="user-name">
             <Link to={"/users"}>Users</Link>
           </div>
         )}
       </div>
+      <div className="loggedin-user">
+        {isLoggedIn && (
+          <div className="user-name">logged in as : {user.name}</div>
+        )}
+      </div>
+
       <button type="button" onClick={handleLogout} className="logout-btn">
         {logoutButtonText}
       </button>
