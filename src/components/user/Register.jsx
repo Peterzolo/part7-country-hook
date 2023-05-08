@@ -4,15 +4,21 @@ import ErrorNotification from "../notification/ErrorNotification";
 import "../../components/user/LoginForm.css";
 import { userRegister } from "../../services/user.service";
 import { useNavigate } from "react-router-dom";
+import { userRegisterFromService } from "../../redux/actions/userAction";
+import { useDispatch } from "react-redux";
+import {
+  hideNotification,
+  showError,
+  showSuccess,
+} from "../../redux/reducers/notification/notificationReducer";
 
 const Register = () => {
-  const [successMessage, setSuccessMessage] = useState(null);
-  const [errorMessage, setErrorMessage] = useState(null);
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   // eslint-disable-next-line no-unused-vars
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -23,22 +29,24 @@ const Register = () => {
         name: name,
       };
 
-      const user = await userRegister(userObject);
-      if (user) {
-        setSuccessMessage("User registered in successfully");
+      const registeredUser = dispatch(userRegisterFromService(userObject));
+      if (registeredUser) {
+        dispatch(showSuccess("User registered successfully"));
         setTimeout(() => {
-          setSuccessMessage("");
-        }, 1000);
-        setUsername("");
-        setName("");
-        setPassword("");
+          dispatch(hideNotification());
+        }, 5000);
         navigate("/login");
+      } else {
+        dispatch(showError("Registration failed"));
+        setTimeout(() => {
+          dispatch(hideNotification());
+        }, 5000);
       }
-    } catch (exception) {
-      setErrorMessage("Invalid credential");
+    } catch (error) {
+      dispatch(showError(error.message));
       setTimeout(() => {
-        setErrorMessage(null);
-      }, 10000);
+        dispatch(hideNotification());
+      }, 5000);
     }
   };
 
@@ -46,11 +54,6 @@ const Register = () => {
     <div className="container">
       <form onSubmit={handleSubmit} className="form-wrap">
         <h5>Register</h5>
-        {successMessage ? (
-          <Notification message={successMessage} />
-        ) : (
-          <ErrorNotification message={errorMessage} />
-        )}
 
         <input
           className="form-input"

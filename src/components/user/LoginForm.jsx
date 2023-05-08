@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import Notification from "../notification/Notification";
-import ErrorNotification from "../notification/ErrorNotification";
 
 import "../../components/user/LoginForm.css";
-import { setToken } from "../../services/blog.service";
 import { useNavigate } from "react-router-dom";
-import { userRegisterFromService } from "../../redux/actions/userAction";
+import { userLoginFromService } from "../../redux/actions/userAction";
 import { useDispatch } from "react-redux";
 import {
   hideNotification,
@@ -16,6 +13,7 @@ import {
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [user, setUser] = useState(null);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -28,16 +26,17 @@ const LoginForm = () => {
         username: username,
         password: password,
       };
-      const createdBlog = dispatch(userRegisterFromService(userObject));
-      if (createdBlog) {
-        dispatch(showSuccess("Blog successfully added"));
+      const loggedInUser = await dispatch(userLoginFromService(userObject));
+      if (loggedInUser) {
+        window.localStorage.setItem("user", JSON.stringify(loggedInUser));
+        setUser(loggedInUser);
+        dispatch(showSuccess("Login successful"));
         setTimeout(() => {
           dispatch(hideNotification());
         }, 5000);
-        // update component state with new blog data
         navigate(`/`);
       } else {
-        dispatch(showError("Could not add blog"));
+        dispatch(showError("Login failed"));
         setTimeout(() => {
           dispatch(hideNotification());
         }, 5000);
