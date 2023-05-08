@@ -34,10 +34,23 @@ const blogSlice = createSlice({
         blog.likes += 1;
       }
     },
+    addCommentToBlog: (state, action) => {
+      const { blogId, content } = action.payload;
+      const blog = state.blogs.find((blog) => blog.id === blogId);
+      if (blog) {
+        blog.comments.push(content);
+      }
+    },
   },
 });
 
-export const { fetchBlogs, addBlog, fetchBlog, likeBlog, deleteABlog } =
-  blogSlice.actions;
+export const {
+  fetchBlogs,
+  addBlog,
+  fetchBlog,
+  likeBlog,
+  deleteABlog,
+  addCommentToBlog,
+} = blogSlice.actions;
 
 export default blogSlice.reducer;

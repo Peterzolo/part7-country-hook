@@ -70,14 +70,14 @@ export const commentOnBlog = async (blogId, commentText) => {
   try {
     const response = await axios.post(
       `${baseUrl}/${blogId}/comment`,
-      { comment: commentText },
+      { cotent: commentText },
       {
         headers: {
           Authorization: bearerToken,
         },
       }
     );
-    return response;
+    return response.data;
   } catch (error) {
     console.log(error?.response?.data);
   }
