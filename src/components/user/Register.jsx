@@ -29,7 +29,9 @@ const Register = () => {
         name: name,
       };
 
-      const registeredUser = dispatch(userRegisterFromService(userObject));
+      const registeredUser = await dispatch(
+        userRegisterFromService(userObject)
+      );
       if (registeredUser) {
         dispatch(showSuccess("User registered successfully"));
         setTimeout(() => {
