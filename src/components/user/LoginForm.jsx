@@ -3,19 +3,22 @@ import Notification from "../notification/Notification";
 import ErrorNotification from "../notification/ErrorNotification";
 
 import "../../components/user/LoginForm.css";
-
 import { setToken } from "../../services/blog.service";
 import { useNavigate } from "react-router-dom";
-import { userLoginFromService } from "../../redux/actions/userAction";
+import { userRegisterFromService } from "../../redux/actions/userAction";
+import { useDispatch } from "react-redux";
+import {
+  hideNotification,
+  showError,
+  showSuccess,
+} from "../../redux/reducers/notification/notificationReducer";
 
 const LoginForm = () => {
-  const [successMessage, setSuccessMessage] = useState(null);
-  const [errorMessage, setErrorMessage] = useState(null);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  // eslint-disable-next-line no-unused-vars
-  const [user, setUser] = useState(null);
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -25,29 +28,25 @@ const LoginForm = () => {
         username: username,
         password: password,
       };
-
-      const user = userLoginFromService(userObject);
-
-      if (user) {
-        window.localStorage.setItem("user", JSON.stringify(user));
-        window.localStorage.setItem("token", JSON.stringify(user.token));
-        const token = JSON.parse(localStorage.getItem("user")).token;
-        setToken(token);
-        setUser(user);
-
-        setSuccessMessage("User Logged in successfully");
+      const createdBlog = dispatch(userRegisterFromService(userObject));
+      if (createdBlog) {
+        dispatch(showSuccess("Blog successfully added"));
         setTimeout(() => {
-          setSuccessMessage("");
-        }, 1000);
-        setUsername("");
-        setPassword("");
-        navigate("/blogs/create");
+          dispatch(hideNotification());
+        }, 5000);
+        // update component state with new blog data
+        navigate(`/`);
+      } else {
+        dispatch(showError("Could not add blog"));
+        setTimeout(() => {
+          dispatch(hideNotification());
+        }, 5000);
       }
-    } catch (exception) {
-      setErrorMessage("Invalid credential");
+    } catch (error) {
+      dispatch(showError(error.message));
       setTimeout(() => {
-        setErrorMessage(null);
-      }, 10000);
+        dispatch(hideNotification());
+      }, 5000);
     }
   };
 
@@ -55,12 +54,6 @@ const LoginForm = () => {
     <div className="container">
       <form onSubmit={handleSubmit} className="form-wrap">
         <h5>LogIn Form</h5>
-        {successMessage ? (
-          <Notification message={successMessage} />
-        ) : (
-          <ErrorNotification message={errorMessage} />
-        )}
-
         <input
           className="form-input"
           type="text"
