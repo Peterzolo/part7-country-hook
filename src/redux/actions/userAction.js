@@ -1,10 +1,12 @@
-import {
-  signupSuccess,
-  signupFail,
-  signinSuccess,
-  signinFail,
-} from "../reducers/auth/authReducer";
 import { userRegister, userLogin } from "../../services/user.service";
+import {
+  signin,
+  signinFail,
+  signinSuccess,
+  signup,
+  signupFail,
+  signupSuccess,
+} from "../reducers/user/userReducer";
 
 export const userRegisterFromService = (registerData) => {
   return async (dispatch) => {
