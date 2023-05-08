@@ -6,6 +6,7 @@ import "../../components/user/LoginForm.css";
 import { userLogIn } from "../../services/user.service";
 import { setToken } from "../../services/blog.service";
 import { useNavigate } from "react-router-dom";
+import { userRegisterFromService } from "../../redux/actions/userAction";
 
 const LoginForm = () => {
   const [successMessage, setSuccessMessage] = useState(null);
@@ -25,7 +26,7 @@ const LoginForm = () => {
         password: password,
       };
 
-      const user = await userLogIn(userObject);
+      const user = userRegisterFromService(userObject);
 
       if (user) {
         window.localStorage.setItem("user", JSON.stringify(user));
