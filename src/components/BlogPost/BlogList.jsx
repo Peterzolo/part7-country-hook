@@ -24,7 +24,7 @@ const BlogList = () => {
             <div key={blog.id} className="list-wrap">
               <ul className="blog-body">
                 <li className="blog-list">
-                  <Link to={`/blogs/${blog.id}`}>
+                  <Link className="link-title" to={`/blogs/${blog.id}`}>
                     <h5>{blog.title}</h5>
                   </Link>
                 </li>

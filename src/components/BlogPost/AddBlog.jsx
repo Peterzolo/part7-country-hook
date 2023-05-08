@@ -44,7 +44,7 @@ const AddBlog = () => {
           dispatch(hideNotification());
         }, 5000);
         // update component state with new blog data
-        navigate(`/blogs`);
+        navigate(`/`);
       } else {
         dispatch(showError("Could not add blog"));
         setTimeout(() => {

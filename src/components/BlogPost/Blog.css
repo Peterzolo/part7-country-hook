@@ -54,6 +54,10 @@
   font-size: 20px;
 }
 
+.link-title {
+  text-decoration: none;
+}
+
 .list-wrap {
   display: flex;
 }

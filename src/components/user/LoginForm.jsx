@@ -15,6 +15,7 @@ const LoginForm = () => {
   // eslint-disable-next-line no-unused-vars
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
