@@ -31,23 +31,6 @@ const UserList = () => {
             ))}
         </tbody>
       </Table>
-      {/* <table>
-        <thead className="table-head">
-          <tr>
-            <th>Author</th>
-            <th>Created blogs</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users &&
-            users.map((user) => (
-              <tr key={user.id}>
-                <td>{user.name}</td>
-                <td>{user.blogs.length}</td>
-              </tr>
-            ))}
-        </tbody>
-      </table> */}
     </div>
   );
 };
