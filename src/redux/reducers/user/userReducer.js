@@ -1,49 +1,49 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  users: [],
-  user: {},
+  user: null,
   isLoading: false,
-  error: false,
+  error: null,
 };
 
-const blogSlice = createSlice({
-  name: "users",
+const authSlice = createSlice({
+  name: "auth",
   initialState,
   reducers: {
-    register: (state, action) => {
+    signup: (state) => {
       state.isLoading = true;
-      state.user = action.payload;
-      state.error = false;
+      state.error = null;
     },
-    login: (state, action) => {
-      state.blog = action.payload;
-    },
-  },
-
-  extraReducers: (builder) => {
-    builder.addCase(register.pending, (state, action) => {
-      state.isLoading = true;
-      state.error = false;
-    });
-    builder.addCase(register.fulfilled, (state, action) => {
+    signupSuccess: (state, action) => {
       state.isLoading = false;
       state.user = action.payload;
-    });
-    builder.addCase(register.rejected, (state, action) => {
+    },
+    signupFail: (state, action) => {
       state.isLoading = false;
-      state.error = true;
-    });
+      state.error = action.payload;
+    },
+    signin: (state) => {
+      state.isLoading = true;
+      state.error = null;
+    },
+    signinSuccess: (state, action) => {
+      state.isLoading = false;
+      state.user = action.payload;
+    },
+    signinFail: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
   },
 });
 
 export const {
-  fetchBlogs,
-  addBlog,
-  fetchBlog,
-  likeBlog,
-  deleteABlog,
-  register,
-} = blogSlice.actions;
+  signup,
+  signupSuccess,
+  signupFail,
+  signin,
+  signinSuccess,
+  signinFail,
+} = authSlice.actions;
 
-export default blogSlice.reducer;
+export default authSlice.reducer;
