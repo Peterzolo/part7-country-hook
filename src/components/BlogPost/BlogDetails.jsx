@@ -34,19 +34,44 @@ const LikeWrap = styled.div`
   width: 200px;
   align-items: center;
   justify-content: space-between;
+  margin-top: 20px;
   /* padding: 10px; */
 `;
-const LikeCount = styled.h5``;
+const LikeCount = styled.p`
+  font-weight: 700;
+`;
 const LikeTitle = styled.h6``;
 const LikeButton = styled.button``;
 const DeleteButton = styled.button``;
 
-const CommentWrap = styled.div``;
-const CommentForm = styled.form``;
-const CommentInput = styled.input``;
+const CommentWrap = styled.div`
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f0f0f0;
+`;
+const CommentForm = styled.form`
+  width: 100%;
+  margin: 0 auto;
+`;
+const CommentInput = styled.input`
+  width: 60%;
+  padding: 10px;
+  margin-left: 10px;
+  border-radius: 10px;
+`;
 
-const CommentBtn = styled.button``;
-const CommentBody = styled.div``;
+const CommentBtn = styled.button`
+  padding: 10px;
+  margin-left: 10px;
+  border-radius: 10px;
+`;
+const CommentBody = styled.p`
+  margin-top: 20px;
+  font-weight: 600;
+  background-color: white;
+  margin-left: 10px;
+  border-radius: 10px;
+`;
 
 const BlogDetails = () => {
   const dispatch = useDispatch();
@@ -146,7 +171,9 @@ const BlogDetails = () => {
 
   return (
     <BlogDetailWrap>
-      {!isLoggedIn && <div>Log in to comment and like</div>}
+      {!isLoggedIn && (
+        <div className="login-comment">Log in to comment and like</div>
+      )}
       <Title>Title : {blog?.title}</Title>
       <Author>Author: {blog.author}</Author>
       <Url>url: {blog.url}</Url>
@@ -183,6 +210,7 @@ const BlogDetails = () => {
             Add Comment
           </CommentBtn>
         </CommentForm>
+        <h5 className="comment-title">Comments</h5>
         <CommentBody>
           {blog.comments &&
             blog.comments.map((comment) => (
