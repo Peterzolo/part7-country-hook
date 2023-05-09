@@ -27,26 +27,38 @@ const Menu = () => {
   return (
     <div className="menu-wrap">
       <div className="menu-item">
-        <Link to={"/search"}>Search Country</Link>
+        <Link to={"/search"} className="link-item">
+          Search Country
+        </Link>
       </div>
       <div className="menu-item">
         {isLoggedIn ? (
-          <Link to={"/blogs/create"}>Add Blog</Link>
+          <Link to={"/blogs/create"} className="link-item">
+            Add Blog
+          </Link>
         ) : (
-          <Link to={"/login"}>Add Blog</Link>
+          <Link to={"/login"} className="link-item">
+            Add Blog
+          </Link>
         )}
       </div>
       <div className="menu-item">
-        <Link to={"/"}>Blogs</Link>
+        <Link to={"/"} className="link-item">
+          Blogs
+        </Link>
       </div>
 
       <div className="menu-item">
-        <Link to={"/register"}>Register</Link>
+        <Link to={"/register"} className="link-item">
+          Register
+        </Link>
       </div>
       <div className="loggedin-user">
         {isLoggedIn && (
           <div className="user-name">
-            <Link to={"/users"}>Users</Link>
+            <Link to={"/users"} className="link-item">
+              Users
+            </Link>
           </div>
         )}
       </div>

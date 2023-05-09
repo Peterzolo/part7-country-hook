@@ -14,6 +14,8 @@ const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  console.log("IS LOGGED IN", isLoggedIn);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -30,6 +32,7 @@ const LoginForm = () => {
       if (loggedInUser) {
         window.localStorage.setItem("user", JSON.stringify(loggedInUser));
         setUser(loggedInUser);
+        setIsLoggedIn(true);
         dispatch(showSuccess("Login successful"));
         setTimeout(() => {
           dispatch(hideNotification());

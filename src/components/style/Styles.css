@@ -51,6 +51,23 @@
   align-items: center;
 }
 
-.logout {
+/* .logout {
   cursor: pointer;
+  background-color: brown;
+  padding: 10px;
+} */
+
+.link-item {
+  text-decoration: none;
+  font-weight: 600;
+  padding: 10px;
+}
+
+.logout-btn {
+  border: none;
+  background-color: rgb(185, 185, 185);
+  border-radius: 5px;
+  padding: 5px;
+  color: brown;
+  font-weight: 600;
 }
