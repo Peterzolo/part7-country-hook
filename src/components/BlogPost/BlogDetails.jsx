@@ -64,8 +64,11 @@ const CommentBtn = styled.button`
   padding: 10px;
   margin-left: 10px;
   border-radius: 10px;
+  background-color: orange;
+  color: white;
+  border: none;
 `;
-const CommentBody = styled.p`
+const CommentBody = styled.div`
   margin-top: 20px;
   font-weight: 600;
   background-color: white;
@@ -76,7 +79,6 @@ const CommentBody = styled.p`
 const BlogDetails = () => {
   const dispatch = useDispatch();
   const { blog } = useSelector((state) => state.blogs);
-  console.log("BLOG----", blog.comments?.content);
   const navigate = useNavigate();
   const { id } = useParams();
 

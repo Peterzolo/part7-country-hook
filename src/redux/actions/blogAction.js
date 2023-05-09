@@ -24,8 +24,13 @@ export const fetchBlogsFromService = () => {
 
 export const createBlogFromService = (dataObject) => {
   return async (dispatch) => {
-    const response = await createBlog(dataObject);
-    dispatch(addBlog(response));
+    try {
+      const response = await createBlog(dataObject);
+      dispatch(addBlog(response));
+    } catch (error) {
+      console.log(error.message);
+      return error.message;
+    }
   };
 };
 export const getBlogFromService = (id) => {
@@ -40,6 +45,7 @@ export const likeBlogFromService = (id) => {
     try {
       const result = await likePost(id);
       dispatch(likeBlog(id));
+      return result;
     } catch (error) {
       console.log(error);
     }
@@ -50,6 +56,7 @@ export const deleteBlogFromService = (id) => {
     try {
       const result = await deleteBlog(id);
       dispatch(deleteABlog(id));
+      return result;
     } catch (error) {
       console.log(error);
     }

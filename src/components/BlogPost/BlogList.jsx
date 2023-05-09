@@ -3,13 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchBlogsFromService } from "../../redux/actions/blogAction";
 
 import "../../components/BlogPost/Blog.css";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const BlogList = () => {
   const dispatch = useDispatch();
   const blogs = useSelector((state) => state.blogs.blogs);
-  const { id } = useParams();
-  console.log("BLOG ID", id);
 
   useEffect(() => {
     dispatch(fetchBlogsFromService());
@@ -20,8 +18,8 @@ const BlogList = () => {
       <h2 className="blog-title">Blog List</h2>
       <div className="blog-list-wrap">
         {blogs &&
-          blogs.map((blog) => (
-            <div key={blog.id} className="list-wrap">
+          blogs.map((blog, index) => (
+            <div key={index} className="list-wrap">
               <ul className="blog-body">
                 <li className="blog-list">
                   <Link className="link-title" to={`/blogs/${blog.id}`}>
